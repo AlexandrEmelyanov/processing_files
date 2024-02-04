@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'rest_framework',
+
+    'files_api',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +101,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
