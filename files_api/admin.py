@@ -10,3 +10,4 @@ class FileAdmin(admin.ModelAdmin):
     ordering = ('-uploaded_at',)
     list_per_page = 10
     list_filter = ('processed', 'uploaded_at')
+    readonly_fields = ('uploaded_at', 'processed')
