@@ -1,0 +1,41 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    env_file: .env.docker
+    environment:
+      POSTGRES_USER: processing_files_username
+      POSTGRES_PASSWORD: processing_files_password
+      POSTGRES_DB: processing_files_db
+    restart: always
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    environment:
+      POSTGRES_USER: processing_files_username
+      POSTGRES_PASSWORD: processing_files_password
+      POSTGRES_DB: processing_files_db
+    env_file: .env.docker
+    command: bash -c "dockerize -wait tcp://db:5432 -timeout 1m && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    depends_on:
+      - db
+
+  celery:
+    build: .
+    env_file: .env.docker
+    command: celery -A processing_files worker --loglevel=info
+    depends_on:
+      - db
+      - redis
+      - app
