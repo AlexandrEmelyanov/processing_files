@@ -2,8 +2,8 @@ import logging
 
 from django.http import HttpResponseServerError
 from rest_framework import viewsets
-from rest_framework.parsers import MultiPartParser
 from rest_framework.generics import CreateAPIView
+from rest_framework.parsers import MultiPartParser
 
 from .models import File
 from .paginations import FileListPagination
