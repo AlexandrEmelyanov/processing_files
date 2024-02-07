@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['vesel.app']
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
